@@ -18,7 +18,7 @@ const Inventory = () => {
     return (
       <div>
         <h2>Inventory</h2>
-        {/* <AddInventoryItem onAdd={handleAddItem} /> */}
+        <AddInventoryItem onAdd={handleAddItem} />
         <div>
           {inventory.map(item => (
             <div key={item.id}>

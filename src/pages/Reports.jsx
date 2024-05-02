@@ -1,4 +1,4 @@
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip,Rectangle,  Legend, ResponsiveContainer } from 'recharts';
+import { BarChart, Bar, Area, AreaChart, XAxis, YAxis, CartesianGrid, Tooltip,Rectangle,  Legend, ResponsiveContainer } from 'recharts';
 
 
 
@@ -55,6 +55,37 @@ const aisha = [
   
   ];
 
+  const data = [
+    {
+      "name": "Jan",
+      "ordered": 4000,
+      "delivered": 2400,
+  
+    },
+    {
+      "name": "Feb",
+      "ordered": 3000,
+      "delivered": 1398,
+     
+    },
+    {
+      "name": "Mar",
+      "ordered": 2000,
+      "delivered": 9800,
+    
+    },
+    {
+      "name": "Apr",
+      "ordered": 2780,
+      "delivered": 3908,
+
+    },
+ 
+
+    
+  ]
+  
+
 
 
 const Reports =()=>{
@@ -77,7 +108,7 @@ console.log(readableDate);
     return(
 
         <>
-        <div style={{width: "800px", height: "400px"}}>
+        <div style={{width: "800px", height: "400px", backgroundColor:"#fff", padding:"15px", borderRadius:"20px", margin:"20px 0px 0px 20px"}}>
 
 
       <ResponsiveContainer width="100%" height="100%">
@@ -92,20 +123,46 @@ console.log(readableDate);
             bottom: 5,
           }}
           outerRadius={20}
-          barGap={"8"}
-          barSize={"10"}
+          
+        
+          barCategoryGap={17} 
+          
         
         >
-          <CartesianGrid strokeDasharray="3 3" />
+          <CartesianGrid vertical={false} height='20' />
           <XAxis dataKey="name" />
           <YAxis />
           <Tooltip />
-          <Legend />
-          <Bar dataKey="purchase" fill="#1570EF"  activeBar={<Rectangle fill="pink" stroke="blue" />} />
-          <Bar dataKey="sales" fill="#51CC5D" activeBar={<Rectangle fill="gold" stroke="purple" />} />
+          <Legend iconType='circle' />
+          <Bar dataKey="purchase" fill="#1570EF" radius={[20, 20, 0, 0]}  activeBar={<Rectangle fill="pink" stroke="blue" />} />
+          <Bar dataKey="sales" fill="#51CC5D" radius={[20, 20, 0, 0]}  activeBar={<Rectangle fill="gold" stroke="purple" />} />
          
         </BarChart>
       </ResponsiveContainer>
+        </div>
+
+        <br></br>
+        <div style={{width: "500px", height: "300px", backgroundColor:"#fff", padding:"15px", borderRadius:"20px", margin:"20px 0px 0px 20px"}}>
+          <AreaChart width={480} height={250} data={data}
+            margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
+            <defs>
+              <linearGradient id="colorordered" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="5%" stopColor="#DF9B2D" stopOpacity={0.8}/>
+                <stop offset="95%" stopColor="#C5A674" stopOpacity={0}/>
+              </linearGradient>
+              <linearGradient id="colordelivered" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="5%" stopColor="#82ca9d" stopOpacity={0.8}/>
+                <stop offset="95%" stopColor="#82ca9d" stopOpacity={0}/>
+              </linearGradient>
+            </defs>
+            <XAxis dataKey="name" />
+            <YAxis />
+            <CartesianGrid vertical={false}  />
+            <Tooltip />
+            <Legend iconType='circle' />
+            <Area type="monotone" dataKey="ordered" stroke="#DF9B2D" fillOpacity={1} fill="url(#colorordered)" />
+            <Area type="monotone" dataKey="delivered" stroke="teal" fillOpacity={0}  />
+          </AreaChart>
         </div>
         </>
     )
